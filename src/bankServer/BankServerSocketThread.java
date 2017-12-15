@@ -5,10 +5,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 
 public class BankServerSocketThread implements Runnable {
 
 	ServerSocket ServerSocket;
+	ArrayList<Thread> threadList = new ArrayList<Thread>();
 
 	public BankServerSocketThread(ServerSocket ServerSocket) {
 		super();
@@ -18,7 +20,7 @@ public class BankServerSocketThread implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
+		Socket clientSocket = null;
 		while (Thread.interrupted() == false) {
 			try {
 				this.ServerSocket.setSoTimeout(1);
@@ -26,19 +28,30 @@ public class BankServerSocketThread implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Socket clientSocket = null;
+			
 			try {
 				clientSocket = this.ServerSocket.accept();
 			} catch (SocketTimeoutException e) {
-
+				continue;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (clientSocket != null) {
 				BankServerThread inConnection = new BankServerThread(clientSocket);
-				new Thread(inConnection).start();
+				Thread t = new Thread(inConnection);
+				t.start();
+				this.threadList.add(t);
 			}
+		}
+		for(Thread t : this.threadList) {
+			t.interrupt();
+		}
+		try {
+			clientSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		System.out.println("BankServerSocketThread exited");
 		return;

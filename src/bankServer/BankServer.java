@@ -28,7 +28,6 @@ public class BankServer {
 				}
 				System.out.println("Exiting");
 				SocketListner.interrupt();
-				//ServerSocket.close();
 				reader.close();
 				
 			} catch (IOException e) {
