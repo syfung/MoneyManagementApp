@@ -23,29 +23,37 @@ public class BankClient {
 				String userInput, serverInput;
 
 				while (true) {
-					if ((serverInput = in.readLine()) != null) {
-						System.out.println(serverInput);
-						System.out.print("BankClient@hostname:");
-						System.out.flush();
-					} else {
-						System.out.println("Srever exit");
+					if (in.ready()) {
+						if ((serverInput = in.readLine()) != null) {
+							System.out.println(serverInput);
+							System.out.print("BankClient@hostname:");
+							System.out.flush();
+						} else {
+							System.out.println("Srever exit");
+							break;
+						}
+					}
+					if (localInStream.ready()) {
+						if ((userInput = localInStream.readLine()).equals("exit")) {
+							System.out.println("User exit");
+							break;
+						}
+						out.println(userInput);
+					}
+					out.println();
+					if(out.checkError()) {
+						System.out.println("\nerror: server exited");
 						break;
 					}
-
-					if ((userInput = localInStream.readLine()).equals("exit")) {
-						System.out.println("User exit");
-						break;
-					}
-					out.println(userInput);
 
 				}
-				
 
 				out.close();
 				in.close();
 				socket.close();
 				localInStream.close();
 			} catch (IOException e) {
+				e.printStackTrace();
 			}
 
 		} else {

@@ -25,7 +25,7 @@ public class BankServerThread implements Runnable {
 			while (Thread.interrupted() == false) {
 				if (in.ready()) {
 					inStr = in.readLine();
-					if (inStr != null) {
+					if (inStr != null && !inStr.isEmpty()) {
 						System.out.println(inStr);
 						out.println("Your are connected to the server");
 					}
