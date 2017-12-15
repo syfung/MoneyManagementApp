@@ -23,6 +23,11 @@ public class BankClient {
 				String userInput, serverInput;
 
 				while (true) {
+					try {
+						Thread.sleep(30);
+					} catch (InterruptedException e) {
+						break;
+					}
 					if (in.ready()) {
 						if ((serverInput = in.readLine()) != null) {
 							System.out.println(serverInput);

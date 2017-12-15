@@ -23,6 +23,11 @@ public class BankServerThread implements Runnable {
 			String inStr;
 			out.println("Your are connected to the server the first time");
 			while (Thread.interrupted() == false) {
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					break;
+				}
 				if (in.ready()) {
 					inStr = in.readLine();
 					if (inStr != null && !inStr.isEmpty()) {
