@@ -45,6 +45,7 @@ public class BankServerSocketThread implements Runnable {
 			}
 		}
 		for(Thread t : this.threadList) {
+			System.out.println("interrupt " + t);
 			t.interrupt();
 		}
 		try {
@@ -52,6 +53,8 @@ public class BankServerSocketThread implements Runnable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			
 		}
 		System.out.println("BankServerSocketThread exited");
 		return;

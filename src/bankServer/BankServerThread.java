@@ -21,12 +21,19 @@ public class BankServerThread implements Runnable {
 			PrintWriter out = new PrintWriter(this.clientSocket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 			String inStr;
-			while(Thread.interrupted() == false) {
-				inStr = in.readLine();
-				if(inStr != null) {
-					System.out.println(inStr);
+			out.println("Your are connected to the server the first time");
+			while (Thread.interrupted() == false) {
+				if (in.ready()) {
+					inStr = in.readLine();
+					if (inStr != null) {
+						System.out.println(inStr);
+						out.println("Your are connected to the server");
+					}
 				}
 			}
+			in.close();
+			out.close();
+			this.clientSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

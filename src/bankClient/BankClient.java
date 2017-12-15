@@ -5,12 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class BankClient {
 
 	public static void main(String[] args) {
-		//This is a pull request test
+		// This is a pull request test
 		if (args.length == 2) {
 			String hostName = args[0];
 			int portNumber = Integer.valueOf(args[1]);
@@ -19,15 +18,33 @@ public class BankClient {
 				System.out.println("Got connection");
 				PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-				Scanner reader = new Scanner(System.in); // Reading from System.in
-				String outStr;
-				while ((outStr = reader.nextLine()).equals("exit") == false) {
-					out.println(outStr);
+				BufferedReader localInStream = new BufferedReader(new InputStreamReader(System.in)); // Reading from
+																										// System.in
+				String userInput, serverInput;
+
+				while (true) {
+					if ((serverInput = in.readLine()) != null) {
+						System.out.println(serverInput);
+						System.out.print("BankClient@hostname:");
+						System.out.flush();
+					} else {
+						System.out.println("Srever exit");
+						break;
+					}
+
+					if ((userInput = localInStream.readLine()).equals("exit")) {
+						System.out.println("User exit");
+						break;
+					}
+					out.println(userInput);
+
 				}
+				
+
 				out.close();
 				in.close();
 				socket.close();
-				reader.close();
+				localInStream.close();
 			} catch (IOException e) {
 			}
 

@@ -21,7 +21,7 @@ public class BankServer {
 				String inStr;
 				System.out.print("BankApp@localhos :");
 				System.out.flush();
-				while ((inStr = reader.nextLine()).startsWith("q") == false) {
+				while ((inStr = reader.nextLine()).equals("exit") == false) {
 					System.out.print("BankApp@localhos :");
 					System.out.flush();
 					System.out.println(inStr);
