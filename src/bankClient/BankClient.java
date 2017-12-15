@@ -21,13 +21,15 @@ public class BankClient {
 				// Open socket and create connection
 				Socket socket = new Socket(hostName, portNumber);
 				System.out.println("Got connection");
-				
+
 				// Open read/write stream
 				PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-				BufferedReader localInStream = new BufferedReader(new InputStreamReader(System.in)); // Reading from
+				BufferedReader localInStream = new BufferedReader(new InputStreamReader(System.in)); // Reading
+																										// from
 																										// System.in
-				String userInput, serverOutput; // serverInput --> in, userInput --> out
+				String userInput, serverOutput; // serverInput --> in, userInput
+												// --> out
 
 				// Main loop
 				while (true) {
@@ -37,21 +39,26 @@ public class BankClient {
 					} catch (InterruptedException e) {
 						break;
 					}
-					
+
 					if (in.ready()) { // Avoid blocking
-						serverOutput = in.readLine(); // Not checking null since in.ready()
+						serverOutput = in.readLine(); // Not checking null since
+														// in.ready()
 						System.out.println(serverOutput);
 						System.out.print("BankClient@hostname:");
 						System.out.flush();
 					}
 					if (localInStream.ready()) { // Avoid blocking
-						if ((userInput = localInStream.readLine()).equals("exit")) { // Some user input handled locally
+						if ((userInput = localInStream.readLine()).equals("exit")) { // Some
+																						// user
+																						// input
+																						// handled
+																						// locally
 							System.out.println("User exit");
 							break;
 						}
 						out.println(userInput); // The rest post to the server
 					}
-					
+
 					// Check server connection by posting new line
 					out.println();
 					if (out.checkError()) {
