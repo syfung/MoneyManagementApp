@@ -11,9 +11,9 @@ public class Account {
 	private String accountName;
 	private AccountHolder accountHolder;
 	private double amount;
-	private ArrayList<Transaction> transactions;
-
 	private AccountType accountType;
+	
+	private ArrayList<Transaction> transactions;
 
 	/**
 	 * @param accountName
@@ -30,15 +30,32 @@ public class Account {
 		this.accountType = AccountType.CASH;
 	}
 
+	/**
+	 * @return account name
+	 */
+	public String getAccountName() {
+		return this.accountName;
+	}
+	
+	/**
+	 * @return account type
+	 */
 	public AccountType getAccountType() {
 		return this.accountType;
 	}
 
 	/**
-	 * @return the accountHolder
+	 * @return account holder
 	 */
 	public AccountHolder getAccountHolder() {
 		return accountHolder;
+	}
+	
+	/**
+	 * @return amount
+	 */
+	public double getAccountAmount() {
+		return this.amount;
 	}
 
 	protected void addTransaction(Transaction t) {

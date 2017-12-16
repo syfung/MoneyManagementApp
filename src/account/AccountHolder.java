@@ -7,11 +7,15 @@ import transaction.DepositTransaction;
 import transaction.Transaction;
 import transaction.WithdrawTransaction;
 
+/**
+ * @author josh
+ *
+ */
 public class AccountHolder {
 	String holderName;
-	
+
 	ArrayList<Account> accounts;
-	
+
 	/**
 	 * @param holderName
 	 */
@@ -20,18 +24,18 @@ public class AccountHolder {
 		this.accounts = new ArrayList<Account>();
 		this.holderName = holderName;
 	}
-	
+
 	public void addAccount(Account account) {
 		this.accounts.add(account);
 	}
-	
+
 	/**
 	 * @param fromAccount
 	 * @param toAccount
 	 * @param amount
 	 */
 	public void makeTransfer(Account fromAccount, Account toAccount, double amount) {
-		if(!this.haveAccount(fromAccount) && !this.haveAccount(toAccount)) {
+		if (!this.haveAccount(fromAccount) && !this.haveAccount(toAccount)) {
 			// Should throw a better exception
 			throw new RuntimeException();
 		}
@@ -41,45 +45,75 @@ public class AccountHolder {
 		fromAccount.addTransaction(withdrawTransfer);
 		toAccount.addTransaction(depositTransfer);
 	}
-	
+
 	public void spendMoney(Account fromAccount, ExternalAccount exAccount, double amount) {
-		if(!this.haveAccount(fromAccount)) { // Not sure what happen if the exAccount have the same owner
+		if (!this.haveAccount(fromAccount)) { // Not sure what happen if the exAccount have the same owner
 			throw new RuntimeException();
 		}
 		ZonedDateTime now = ZonedDateTime.now();
 		Transaction withdrawTransfer = new WithdrawTransaction("spend", amount, exAccount, now, now);
 		fromAccount.addTransaction(withdrawTransfer);
 	}
-	
-	public Account[] getAccounts() {
-		return (Account[]) this.accounts.toArray();
+
+	/**
+	 * @param name
+	 * @return first account with the same name or null is no found
+	 */
+	public Account getAccount(String name) {
+		for (Account a : this.accounts) {
+			if (a.getAccountName().equals(name)) {
+				return a;
+			}
+		}
+		return null;
 	}
-	
+
+	public ArrayList<Account> getAccounts() {
+		return this.accounts;
+	}
+
+	/**
+	 * @param t
+	 * @return an ArrayList with the account of the given type, or an empty
+	 *         list there is no such account
+	 */
+	public ArrayList<Account> getAccounts(AccountType t) {
+		ArrayList<Account> aList = new ArrayList<Account>();
+		for (Account a : this.accounts) {
+			if (a.getAccountType().equals(t)) {
+				aList.add(a);
+			}
+		}
+		return aList;
+	}
+
 	public ArrayList<Transaction> getExternalTransaction() {
 		ArrayList<Transaction> tList = new ArrayList<Transaction>();
-		for(Account a : this.accounts) {
-			for(Transaction t : a.getTransactions()) {
-				if(t.isExternal()) {
+		for (Account a : this.accounts) {
+			for (Transaction t : a.getTransactions()) {
+				if (t.isExternal()) {
 					tList.add(t);
 				}
 			}
 		}
-		return tList;		
+		return tList;
 	}
 
 	private boolean haveAccount(Account a) {
-		if(this.accounts.contains(a)) {
+		if (this.accounts.contains(a)) {
 			return true;
 		}
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "AccountHolder [holderName=" + holderName + "]";
 	}
-	
+
 }
