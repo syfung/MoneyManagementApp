@@ -4,36 +4,11 @@ import java.time.ZonedDateTime;
 
 import account.Account;
 
-public class Transaction {
-	Account fromAccount;
-	Account toAccount;
-	
-	ZonedDateTime createdDate;
-	ZonedDateTime spendingDate;
-	
-	double amount;
-
-	/**
-	 * @param fromAccount
-	 * @param toAccount
-	 * @param amount
-	 */
-	public Transaction(Account fromAccount, Account toAccount, double amount) {
-		super();
-		this.fromAccount = fromAccount;
-		this.toAccount = toAccount;
-		this.amount = amount;
-		
-		this.createdDate = ZonedDateTime.now();
-		this.spendingDate = this.createdDate.minusSeconds(0);
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Transaction [fromAccount=" + fromAccount.getAccountName() + ", toAccount=" + toAccount.getAccountName() + ", createdDate=" + createdDate
-				+ ", spendingDate=" + spendingDate + ", amount=" + amount + "]";
-	}
+public interface Transaction {
+	public TransactionType getTransactionType();
+	public double getAmount();
+	public String getName();
+	public Account getToFromAccount();
+	public ZonedDateTime getCreatedDateTime();
+	public ZonedDateTime getTransactonDateTime();
 }

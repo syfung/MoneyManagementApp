@@ -1,5 +1,5 @@
 package account;
 
 public enum AccountType {
-	CASH, DEBIT, CREDIT
+	CASH, DEBIT, CREDIT, EXTERNAL
 }
