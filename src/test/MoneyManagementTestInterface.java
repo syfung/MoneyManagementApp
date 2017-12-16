@@ -12,7 +12,7 @@ public class MoneyManagementTestInterface {
 		Account b = new Account("Cash2", tester1, 0);
 		System.out.println(b);
 		System.out.println(tester1);
-		a.reciveTransaction(b, 100);
+		tester1.makeTransfer(a, b, 100);
 		System.out.println(a);
 		System.out.println(b);
 	}
