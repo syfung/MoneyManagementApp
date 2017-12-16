@@ -31,7 +31,7 @@ public class AccountHolder {
 	 * @param amount
 	 */
 	public void makeTransfer(Account fromAccount, Account toAccount, double amount) {
-		if(fromAccount.getAccountHolder().equals(toAccount.getAccountHolder()) == false) {
+		if(!this.haveAccount(fromAccount) && !this.haveAccount(toAccount)) {
 			// Should throw a better exception
 			throw new RuntimeException();
 		}
@@ -41,12 +41,21 @@ public class AccountHolder {
 		fromAccount.addTransaction(withdrawTransfer);
 		toAccount.addTransaction(depositTransfer);
 	}
-
+	
+	public void spendMoney(Account fromAccount, ExternalAccount exAccount, double amount) {
+		if(!this.haveAccount(fromAccount)) { // Not sure what happen if the exAccount have the same owner
+			throw new RuntimeException();
+		}
+		ZonedDateTime now = ZonedDateTime.now();
+		Transaction withdrawTransfer = new WithdrawTransaction("spend", amount, exAccount, now, now);
+		fromAccount.addTransaction(withdrawTransfer);
+	}
+	
 	public Account[] getAccounts() {
 		return (Account[]) this.accounts.toArray();
 	}
 	
-	public Transaction[] getExternalTransaction() {
+	public ArrayList<Transaction> getExternalTransaction() {
 		ArrayList<Transaction> tList = new ArrayList<Transaction>();
 		for(Account a : this.accounts) {
 			for(Transaction t : a.getTransactions()) {
@@ -55,7 +64,14 @@ public class AccountHolder {
 				}
 			}
 		}
-		return (Transaction[]) tList.toArray();		
+		return tList;		
+	}
+
+	private boolean haveAccount(Account a) {
+		if(this.accounts.contains(a)) {
+			return true;
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
