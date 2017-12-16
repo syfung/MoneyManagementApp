@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Scanner;
 
-public class BankServer {
+public class MoneyServer {
 
 	public static void main(String[] args) {
 		// Usage BankServer port number
@@ -15,7 +15,7 @@ public class BankServer {
 			ServerSocket ServerSocket;
 			try {
 				ServerSocket = new ServerSocket(portNumber);
-				Thread SocketListner = new Thread(new BankServerSocketThread(ServerSocket));
+				Thread SocketListner = new Thread(new MoneyServerSocketThread(ServerSocket));
 				SocketListner.start();
 
 				// While taking in put from the command pomp

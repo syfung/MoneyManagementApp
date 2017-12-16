@@ -7,12 +7,12 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-public class BankServerSocketThread implements Runnable {
+public class MoneyServerSocketThread implements Runnable {
 
 	ServerSocket ServerSocket;
 	ArrayList<Thread> threadList = new ArrayList<Thread>();
 
-	public BankServerSocketThread(ServerSocket ServerSocket) {
+	public MoneyServerSocketThread(ServerSocket ServerSocket) {
 		super();
 		this.ServerSocket = ServerSocket;
 	}
@@ -38,7 +38,7 @@ public class BankServerSocketThread implements Runnable {
 				e.printStackTrace();
 			}
 			if (clientSocket != null) {
-				BankServerThread inConnection = new BankServerThread(clientSocket);
+				MoneyServerThread inConnection = new MoneyServerThread(clientSocket);
 				Thread t = new Thread(inConnection);
 				t.start();
 				this.threadList.add(t);

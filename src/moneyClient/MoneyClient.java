@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class BankClient {
+public class MoneyClient {
 
 	public static void main(String[] args) {
 		// Check usage

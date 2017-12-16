@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class BankServerThread implements Runnable {
+public class MoneyServerThread implements Runnable {
 	Socket clientSocket;
 
-	public BankServerThread(Socket clientSocket) {
+	public MoneyServerThread(Socket clientSocket) {
 		super();
 		this.clientSocket = clientSocket;
 	}
