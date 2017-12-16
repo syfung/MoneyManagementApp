@@ -4,7 +4,15 @@ import java.time.ZonedDateTime;
 
 import account.Account;
 
-public interface Transaction {
+public class Transaction {
+	
+	Account fromAccount;
+	Account toAccount;
+	double amount;
+	String message;
+	ZonedDateTime createdDateTime;
+	ZonedDateTime transactDateTime;
+	
 	public TransactionType getTransactionType();
 	public boolean isExternal();
 	public double getAmount();

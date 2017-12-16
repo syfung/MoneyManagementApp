@@ -30,44 +30,44 @@ public class AccountHolder {
 		this.accounts.add(account);
 	}
 
-	/**
-	 * @param fromAccount
-	 * @param toAccount
-	 * @param amount
-	 */
-	public void makeTransfer(Account fromAccount, Account toAccount, double amount) {
-		if (!this.haveAccount(fromAccount) && !this.haveAccount(toAccount)) {
-			// Should throw a better exception
-			throw new RuntimeException();
-		}
-		ZonedDateTime now = ZonedDateTime.now();
-		Transaction withdrawTransfer = new WithdrawTransaction("transfer", amount, toAccount, now);
-		Transaction depositTransfer = new DepositTransaction("transfer", amount, fromAccount, now);
-		fromAccount.addTransaction(withdrawTransfer);
-		toAccount.addTransaction(depositTransfer);
-	}
-
-	public void spendMoney(Account fromAccount, ExternalAccount exAccount, double amount) {
-		if (!this.haveAccount(fromAccount)) { // Not sure what happen if the exAccount have the same owner
-			throw new RuntimeException();
-		}
-		ZonedDateTime now = ZonedDateTime.now();
-		Transaction withdrawTransfer = new SpendingTransaction("spend", amount, exAccount, now);
-		fromAccount.addTransaction(withdrawTransfer);
-	}
-
-	/**
-	 * @param name
-	 * @return first account with the same name or null is no found
-	 */
-	public Account getAccount(String name) {
-		for (Account a : this.accounts) {
-			if (a.getAccountName().equals(name)) {
-				return a;
-			}
-		}
-		return null;
-	}
+//	/**
+//	 * @param fromAccount
+//	 * @param toAccount
+//	 * @param amount
+//	 */
+//	public void makeTransfer(Account fromAccount, Account toAccount, double amount) {
+//		if (!this.haveAccount(fromAccount) && !this.haveAccount(toAccount)) {
+//			// Should throw a better exception
+//			throw new RuntimeException();
+//		}
+//		ZonedDateTime now = ZonedDateTime.now();
+//		Transaction withdrawTransfer = new WithdrawTransaction("transfer", amount, toAccount, now);
+//		Transaction depositTransfer = new DepositTransaction("transfer", amount, fromAccount, now);
+//		fromAccount.addTransaction(withdrawTransfer);
+//		toAccount.addTransaction(depositTransfer);
+//	}
+//
+//	public void spendMoney(Account fromAccount, ExternalAccount exAccount, double amount) {
+//		if (!this.haveAccount(fromAccount)) { // Not sure what happen if the exAccount have the same owner
+//			throw new RuntimeException();
+//		}
+//		ZonedDateTime now = ZonedDateTime.now();
+//		Transaction withdrawTransfer = new SpendingTransaction("spend", amount, exAccount, now);
+//		fromAccount.addTransaction(withdrawTransfer);
+//	}
+//
+//	/**
+//	 * @param name
+//	 * @return first account with the same name or null is no found
+//	 */
+//	public Account getAccount(String name) {
+//		for (Account a : this.accounts) {
+//			if (a.getAccountName().equals(name)) {
+//				return a;
+//			}
+//		}
+//		return null;
+//	}
 
 	public ArrayList<Account> getAccounts() {
 		return this.accounts;
@@ -88,17 +88,17 @@ public class AccountHolder {
 		return aList;
 	}
 
-	public ArrayList<Transaction> getExternalTransaction() {
-		ArrayList<Transaction> tList = new ArrayList<Transaction>();
-		for (Account a : this.accounts) {
-			for (Transaction t : a.getTransactions()) {
-				if (t.isExternal()) {
-					tList.add(t);
-				}
-			}
-		}
-		return tList;
-	}
+//	public ArrayList<Transaction> getExternalTransaction() {
+//		ArrayList<Transaction> tList = new ArrayList<Transaction>();
+//		for (Account a : this.accounts) {
+//			for (Transaction t : a.getTransactions()) {
+//				if (t.isExternal()) {
+//					tList.add(t);
+//				}
+//			}
+//		}
+//		return tList;
+//	}
 
 	private boolean haveAccount(Account a) {
 		if (this.accounts.contains(a)) {

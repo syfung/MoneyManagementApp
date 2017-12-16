@@ -6,27 +6,29 @@ import java.util.ArrayList;
 import transaction.CatchUpTransaction;
 import transaction.Transaction;
 import transaction.TransactionType;
+import transactionhistory.TransactionHistory;
 
 public class Account {
 	private String accountName;
+	private long accountNum;
 	private AccountHolder accountHolder;
-	private double amount;
+	private double balance;
 	private AccountType accountType;
 	
-	private ArrayList<Transaction> transactions;
+	private ArrayList<TransactionHistory> transactionHistories;
 
 	/**
 	 * @param accountName
 	 * @param accountHolder
-	 * @param amount
+	 * @param balance
 	 */
 	public Account(String accountName, AccountHolder accountHolder, double amount) {
 		super();
 		this.accountName = accountName;
 		this.accountHolder = accountHolder;
-		this.amount = amount;
+		this.balance = amount;
 
-		this.transactions = new ArrayList<Transaction>();
+		this.transactionHistories = new ArrayList<TransactionHistory>();
 		this.accountType = AccountType.CASH;
 	}
 
@@ -52,40 +54,40 @@ public class Account {
 	}
 	
 	/**
-	 * @return amount
+	 * @return balance
 	 */
 	public double getAccountAmount() {
-		return this.amount;
+		return this.balance;
 	}
-
-	protected void addTransaction(Transaction t) {
-		this.transactions.add(t);
-		if (t.getTransactionType().equals(TransactionType.DEPOSIT)) {
-			this.updateAmount(this.amount += t.getAmount());
-		} else if (t.getTransactionType().equals(TransactionType.WITHDRAW)) {
-			this.updateAmount(this.amount -= t.getAmount());
-		}
-	}
-
-	protected void catchupAmount(double amount) {
-		if (this.amount != amount) {
-			Transaction t = new CatchUpTransaction(amount - this.amount, ZonedDateTime.now());
-			this.transactions.add(t);
-			this.amount = amount;
-		}
-	}
-
-	protected void setType(AccountType t) {
-		this.accountType = t;
-	}
-
-	protected ArrayList<Transaction> getTransactions() {
-		return this.transactions;
-	}
-
-	private void updateAmount(double amount) {
-		this.amount = amount;
-	}
+//
+//	protected void addTransaction(Transaction t) {
+//		this.transactions.add(t);
+//		if (t.getTransactionType().equals(TransactionType.DEPOSIT)) {
+//			this.updateAmount(this.balance += t.getAmount());
+//		} else if (t.getTransactionType().equals(TransactionType.WITHDRAW)) {
+//			this.updateAmount(this.balance -= t.getAmount());
+//		}
+//	}
+//
+//	protected void catchupAmount(double amount) {
+//		if (this.balance != amount) {
+//			Transaction t = new CatchUpTransaction(amount - this.balance, ZonedDateTime.now());
+//			this.transactions.add(t);
+//			this.balance = amount;
+//		}
+//	}
+//
+//	protected void setType(AccountType t) {
+//		this.accountType = t;
+//	}
+//
+//	protected ArrayList<Transaction> getTransactions() {
+//		return this.transactions;
+//	}
+//
+//	private void updateAmount(double amount) {
+//		this.balance = amount;
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -94,7 +96,7 @@ public class Account {
 	 */
 	@Override
 	public String toString() {
-		return "Account [accountName=" + accountName + ", accountHolder=" + accountHolder + ", amount=" + amount
-				+ ", transactions=" + transactions + ", accountType=" + accountType + "]";
+		return "Account [accountName=" + accountName + ", accountHolder=" + accountHolder + ", balance=" + balance
+				+ ", transactionHistories=" + transactionHistories + ", accountType=" + accountType + "]";
 	}
 }
