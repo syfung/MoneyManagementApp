@@ -1,4 +1,4 @@
-package bankServer;
+package moneyServer;
 
 import java.io.IOException;
 import java.net.ServerSocket;

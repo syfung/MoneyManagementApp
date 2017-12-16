@@ -1,4 +1,4 @@
-package bankClient;
+package moneyClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
