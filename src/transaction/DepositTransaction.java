@@ -7,8 +7,8 @@ import account.Account;
 public class DepositTransaction extends ConcreteTransaction {
 
 	public DepositTransaction(String transactionName, double amount, Account fromAccount,
-			ZonedDateTime createdDateTime, ZonedDateTime transactTime) {
-		super(transactionName, amount, TransactionType.DEPOSIT, fromAccount, createdDateTime, transactTime);
+			ZonedDateTime createdDateTime) {
+		super(transactionName, amount, TransactionType.DEPOSIT, fromAccount, createdDateTime);
 		// TODO Auto-generated constructor stub
 	}
 

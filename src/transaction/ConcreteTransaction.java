@@ -20,6 +20,24 @@ public class ConcreteTransaction implements Transaction {
 	 * @param transactionType
 	 * @param toFromAccount
 	 * @param createdDateTime
+	 */
+	public ConcreteTransaction(String transactionName, double amount, TransactionType transactionType,
+			Account toFromAccount, ZonedDateTime createdDateTime) {
+		super();
+		this.transactionName = transactionName;
+		this.amount = amount;
+		this.transactionType = transactionType;
+		this.toFromAccount = toFromAccount;
+		this.createdDateTime = createdDateTime;
+		this.transactTime = createdDateTime;
+	}
+	
+	/**
+	 * @param transactionName
+	 * @param amount
+	 * @param transactionType
+	 * @param toFromAccount
+	 * @param createdDateTime
 	 * @param transactTime
 	 */
 	public ConcreteTransaction(String transactionName, double amount, TransactionType transactionType,

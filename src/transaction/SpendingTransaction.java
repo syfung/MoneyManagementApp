@@ -6,9 +6,8 @@ import account.Account;
 
 public class SpendingTransaction extends WithdrawTransaction {
 
-	public SpendingTransaction(String transactionName, double amount, Account toAccount, ZonedDateTime createdDateTime,
-			ZonedDateTime transactTime) {
-		super(transactionName, amount, toAccount, createdDateTime, transactTime);
+	public SpendingTransaction(String transactionName, double amount, Account toAccount, ZonedDateTime createdDateTime) {
+		super(transactionName, amount, toAccount, createdDateTime);
 	}
 
 	/* (non-Javadoc)

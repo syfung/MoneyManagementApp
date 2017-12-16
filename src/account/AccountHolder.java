@@ -41,8 +41,8 @@ public class AccountHolder {
 			throw new RuntimeException();
 		}
 		ZonedDateTime now = ZonedDateTime.now();
-		Transaction withdrawTransfer = new WithdrawTransaction("transfer", amount, toAccount, now, now);
-		Transaction depositTransfer = new DepositTransaction("transfer", amount, fromAccount, now, now);
+		Transaction withdrawTransfer = new WithdrawTransaction("transfer", amount, toAccount, now);
+		Transaction depositTransfer = new DepositTransaction("transfer", amount, fromAccount, now);
 		fromAccount.addTransaction(withdrawTransfer);
 		toAccount.addTransaction(depositTransfer);
 	}
@@ -52,7 +52,7 @@ public class AccountHolder {
 			throw new RuntimeException();
 		}
 		ZonedDateTime now = ZonedDateTime.now();
-		Transaction withdrawTransfer = new SpendingTransaction("spend", amount, exAccount, now, now);
+		Transaction withdrawTransfer = new SpendingTransaction("spend", amount, exAccount, now);
 		fromAccount.addTransaction(withdrawTransfer);
 	}
 
