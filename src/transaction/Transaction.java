@@ -6,6 +6,7 @@ import account.Account;
 
 public interface Transaction {
 	public TransactionType getTransactionType();
+	public boolean isExternal();
 	public double getAmount();
 	public String getName();
 	public Account getToFromAccount();

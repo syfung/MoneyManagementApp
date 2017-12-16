@@ -50,8 +50,16 @@ public class Account {
 		}
 	}
 	
+	public AccountType getAccountType() {
+		return this.accountType;
+	}
+	
 	protected void setType(AccountType t) {
 		this.accountType = t;
+	}
+	
+	protected ArrayList<Transaction> getTransactions() {
+		return this.transactions;
 	}
 
 	/* (non-Javadoc)

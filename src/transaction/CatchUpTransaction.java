@@ -9,6 +9,7 @@ public class CatchUpTransaction extends ConcreteTransaction {
 		super();
 		// TODO Auto-generated constructor stub
 		this.amount = different;
+		this.transactionType = TransactionType.CATCHUP;
 	}
 	
 }

@@ -3,9 +3,12 @@ package transaction;
 import java.time.ZonedDateTime;
 
 import account.Account;
+import account.AccountType;
 
 public class ConcreteTransaction implements Transaction {
 	double amount;
+	TransactionType transactionType;
+	Account toFromAccount;
 
 	@Override
 	public TransactionType getTransactionType() {
@@ -15,8 +18,7 @@ public class ConcreteTransaction implements Transaction {
 
 	@Override
 	public double getAmount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.amount;
 	}
 
 	@Override
@@ -41,6 +43,14 @@ public class ConcreteTransaction implements Transaction {
 	public ZonedDateTime getTransactonDateTime() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isExternal() {
+		if(this.toFromAccount.getAccountType().equals(AccountType.EXTERNAL)) {
+			return true;
+		}
+		return false;
 	}
 
 }
