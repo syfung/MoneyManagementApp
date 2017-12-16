@@ -26,8 +26,10 @@ public class AccountHolder {
 		this.holderName = holderName;
 	}
 
-	public void addAccount(Account account) {
-		this.accounts.add(account);
+	public Account newAccount(String accName, double accBalance, AccountType accType) {
+		Account a = new Account(accName, this, accBalance, accType);
+		this.accounts.add(a);
+		return a;		
 	}
 
 //	/**

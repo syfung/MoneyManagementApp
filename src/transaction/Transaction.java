@@ -17,7 +17,8 @@ public class Transaction {
 	public boolean isExternal();
 	public double getAmount();
 	public String getName();
-	public Account getToFromAccount();
+	public Account getFromAccount();
+	public Account getToAccount();
 	public ZonedDateTime getCreatedDateTime();
 	public ZonedDateTime getTransactDateTime();
 }

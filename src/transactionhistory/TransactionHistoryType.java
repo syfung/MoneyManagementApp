@@ -1,5 +1,5 @@
 package transactionhistory;
 
 public enum TransactionHistoryType {
-	WITHDRAW, DEPOSITE
+	WITHDRAW, DEPOSIT
 }
