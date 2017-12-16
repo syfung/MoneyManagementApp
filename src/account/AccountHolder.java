@@ -15,6 +15,10 @@ public class AccountHolder {
 		this.accounts = new ArrayList<Account>();
 		this.holderName = holderName;
 	}
+	
+	public void addAccount(Account account) {
+		this.accounts.add(account);
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
