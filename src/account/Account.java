@@ -1,5 +1,6 @@
 package account;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import transaction.CatchUpTransaction;
@@ -24,45 +25,47 @@ public class Account {
 		this.accountName = accountName;
 		this.accountHolder = accountHolder;
 		this.amount = amount;
-		
+
 		this.transactions = new ArrayList<Transaction>();
 		this.accountType = AccountType.CASH;
 	}
-	
+
 	protected void addTransaction(Transaction t) {
 		this.transactions.add(t);
-		if(t.getTransactionType().equals(TransactionType.DEPOSIT)) {
+		if (t.getTransactionType().equals(TransactionType.DEPOSIT)) {
 			this.updateAmount(this.amount += t.getAmount());
-		} else if(t.getTransactionType().equals(TransactionType.WITHDRAW)) {
+		} else if (t.getTransactionType().equals(TransactionType.WITHDRAW)) {
 			this.updateAmount(this.amount -= t.getAmount());
 		}
 	}
-	
+
 	private void updateAmount(double amount) {
 		this.amount = amount;
 	}
-		
+
 	protected void catchupAmount(double amount) {
-		if(this.amount != amount) {
-			Transaction t = new CatchUpTransaction(amount - this.amount);
+		if (this.amount != amount) {
+			Transaction t = new CatchUpTransaction(amount - this.amount, ZonedDateTime.now());
 			this.transactions.add(t);
 			this.amount = amount;
 		}
 	}
-	
+
 	public AccountType getAccountType() {
 		return this.accountType;
 	}
-	
+
 	protected void setType(AccountType t) {
 		this.accountType = t;
 	}
-	
+
 	protected ArrayList<Transaction> getTransactions() {
 		return this.transactions;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

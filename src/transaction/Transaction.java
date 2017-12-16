@@ -11,5 +11,5 @@ public interface Transaction {
 	public String getName();
 	public Account getToFromAccount();
 	public ZonedDateTime getCreatedDateTime();
-	public ZonedDateTime getTransactonDateTime();
+	public ZonedDateTime getTransactDateTime();
 }

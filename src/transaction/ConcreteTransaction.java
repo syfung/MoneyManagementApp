@@ -6,14 +6,36 @@ import account.Account;
 import account.AccountType;
 
 public class ConcreteTransaction implements Transaction {
+	String transactionName;
 	double amount;
 	TransactionType transactionType;
 	Account toFromAccount;
 
+	ZonedDateTime createdDateTime;
+	ZonedDateTime transactTime;
+
+	/**
+	 * @param transactionName
+	 * @param amount
+	 * @param transactionType
+	 * @param toFromAccount
+	 * @param createdDateTime
+	 * @param transactTime
+	 */
+	public ConcreteTransaction(String transactionName, double amount, TransactionType transactionType,
+			Account toFromAccount, ZonedDateTime createdDateTime, ZonedDateTime transactTime) {
+		super();
+		this.transactionName = transactionName;
+		this.amount = amount;
+		this.transactionType = transactionType;
+		this.toFromAccount = toFromAccount;
+		this.createdDateTime = createdDateTime;
+		this.transactTime = transactTime;
+	}
+
 	@Override
 	public TransactionType getTransactionType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.transactionType;
 	}
 
 	@Override
@@ -23,31 +45,27 @@ public class ConcreteTransaction implements Transaction {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.transactionName;
 	}
 
 	@Override
 	public Account getToFromAccount() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.toFromAccount;
 	}
 
 	@Override
 	public ZonedDateTime getCreatedDateTime() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.createdDateTime;
 	}
 
 	@Override
-	public ZonedDateTime getTransactonDateTime() {
-		// TODO Auto-generated method stub
-		return null;
+	public ZonedDateTime getTransactDateTime() {
+		return this.transactTime;
 	}
 
 	@Override
 	public boolean isExternal() {
-		if(this.toFromAccount.getAccountType().equals(AccountType.EXTERNAL)) {
+		if (this.toFromAccount.getAccountType().equals(AccountType.EXTERNAL)) {
 			return true;
 		}
 		return false;

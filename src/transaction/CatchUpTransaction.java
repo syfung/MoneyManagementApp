@@ -1,15 +1,15 @@
 package transaction;
 
+import java.time.ZonedDateTime;
+
 public class CatchUpTransaction extends ConcreteTransaction {
 
 	/**
-	 * 
+	 * @param different
+	 * @param now
 	 */
-	public CatchUpTransaction(double different) {
-		super();
-		// TODO Auto-generated constructor stub
-		this.amount = different;
-		this.transactionType = TransactionType.CATCHUP;
+	public CatchUpTransaction(double different, ZonedDateTime now) {
+		super("catch up", different, TransactionType.CATCHUP, null, now, now);
 	}
-	
+
 }
