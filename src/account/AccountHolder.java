@@ -1,8 +1,11 @@
 package account;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
+import transaction.DepositTransaction;
 import transaction.Transaction;
+import transaction.WithdrawTransaction;
 
 public class AccountHolder {
 	String holderName;
@@ -20,6 +23,18 @@ public class AccountHolder {
 	
 	public void addAccount(Account account) {
 		this.accounts.add(account);
+	}
+	
+	public Account[] getAccounts() {
+		return (Account[]) this.accounts.toArray();
+	}
+	
+	public void makeTransfer(Account fromAccount, Account toAccount, double amount) {
+		ZonedDateTime now = ZonedDateTime.now();
+		Transaction withdrawTransfer = new WithdrawTransaction("transfer", amount, toAccount, now, now);
+		Transaction depositTransfer = new DepositTransaction("transfer", amount, fromAccount, now, now);
+		fromAccount.addTransaction(withdrawTransfer);
+		toAccount.addTransaction(depositTransfer);
 	}
 	
 	public Transaction[] getExternalTransaction() {

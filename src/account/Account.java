@@ -30,6 +30,10 @@ public class Account {
 		this.accountType = AccountType.CASH;
 	}
 
+	public AccountType getAccountType() {
+		return this.accountType;
+	}
+
 	protected void addTransaction(Transaction t) {
 		this.transactions.add(t);
 		if (t.getTransactionType().equals(TransactionType.DEPOSIT)) {
@@ -37,10 +41,6 @@ public class Account {
 		} else if (t.getTransactionType().equals(TransactionType.WITHDRAW)) {
 			this.updateAmount(this.amount -= t.getAmount());
 		}
-	}
-
-	private void updateAmount(double amount) {
-		this.amount = amount;
 	}
 
 	protected void catchupAmount(double amount) {
@@ -51,16 +51,16 @@ public class Account {
 		}
 	}
 
-	public AccountType getAccountType() {
-		return this.accountType;
-	}
-
 	protected void setType(AccountType t) {
 		this.accountType = t;
 	}
 
 	protected ArrayList<Transaction> getTransactions() {
 		return this.transactions;
+	}
+
+	private void updateAmount(double amount) {
+		this.amount = amount;
 	}
 
 	/*

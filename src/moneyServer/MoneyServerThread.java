@@ -16,7 +16,6 @@ public class MoneyServerThread implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try {
 			PrintWriter out = new PrintWriter(this.clientSocket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
@@ -40,7 +39,6 @@ public class MoneyServerThread implements Runnable {
 			out.close();
 			this.clientSocket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

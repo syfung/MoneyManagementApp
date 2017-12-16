@@ -19,13 +19,11 @@ public class MoneyServerSocketThread implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		Socket clientSocket = null;
 		while (Thread.interrupted() == false) {
 			try {
 				this.ServerSocket.setSoTimeout(1);
 			} catch (SocketException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -34,7 +32,6 @@ public class MoneyServerSocketThread implements Runnable {
 			} catch (SocketTimeoutException e) {
 				continue;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (clientSocket != null) {
@@ -52,7 +49,6 @@ public class MoneyServerSocketThread implements Runnable {
 			clientSocket.close();
 			this.ServerSocket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			
