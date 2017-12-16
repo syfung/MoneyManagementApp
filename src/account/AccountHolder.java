@@ -25,16 +25,25 @@ public class AccountHolder {
 		this.accounts.add(account);
 	}
 	
-	public Account[] getAccounts() {
-		return (Account[]) this.accounts.toArray();
-	}
-	
+	/**
+	 * @param fromAccount
+	 * @param toAccount
+	 * @param amount
+	 */
 	public void makeTransfer(Account fromAccount, Account toAccount, double amount) {
+		if(fromAccount.getAccountHolder().equals(toAccount.getAccountHolder()) == false) {
+			// Should throw a better exception
+			throw new RuntimeException();
+		}
 		ZonedDateTime now = ZonedDateTime.now();
 		Transaction withdrawTransfer = new WithdrawTransaction("transfer", amount, toAccount, now, now);
 		Transaction depositTransfer = new DepositTransaction("transfer", amount, fromAccount, now, now);
 		fromAccount.addTransaction(withdrawTransfer);
 		toAccount.addTransaction(depositTransfer);
+	}
+
+	public Account[] getAccounts() {
+		return (Account[]) this.accounts.toArray();
 	}
 	
 	public Transaction[] getExternalTransaction() {

@@ -34,6 +34,13 @@ public class Account {
 		return this.accountType;
 	}
 
+	/**
+	 * @return the accountHolder
+	 */
+	public AccountHolder getAccountHolder() {
+		return accountHolder;
+	}
+
 	protected void addTransaction(Transaction t) {
 		this.transactions.add(t);
 		if (t.getTransactionType().equals(TransactionType.DEPOSIT)) {

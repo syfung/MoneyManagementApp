@@ -1,7 +1,6 @@
 package test;
 
 import account.*;
-import transaction.*;
 
 public class MoneyManagementTestInterface {
 	public static void main(String[] args) {
