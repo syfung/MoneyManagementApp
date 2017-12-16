@@ -33,7 +33,7 @@ public class Transaction {
 	 */
 	@Override
 	public String toString() {
-		return "Transaction [fromAccount=" + fromAccount + ", toAccount=" + toAccount + ", createdDate=" + createdDate
+		return "Transaction [fromAccount=" + fromAccount.getAccountName() + ", toAccount=" + toAccount.getAccountName() + ", createdDate=" + createdDate
 				+ ", spendingDate=" + spendingDate + ", amount=" + amount + "]";
 	}
 }
