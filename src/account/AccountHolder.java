@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import transaction.DepositTransaction;
+import transaction.SpendingTransaction;
 import transaction.Transaction;
 import transaction.WithdrawTransaction;
 
@@ -51,7 +52,7 @@ public class AccountHolder {
 			throw new RuntimeException();
 		}
 		ZonedDateTime now = ZonedDateTime.now();
-		Transaction withdrawTransfer = new WithdrawTransaction("spend", amount, exAccount, now, now);
+		Transaction withdrawTransfer = new SpendingTransaction("spend", amount, exAccount, now, now);
 		fromAccount.addTransaction(withdrawTransfer);
 	}
 
